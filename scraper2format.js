@@ -8,7 +8,7 @@ let agencyinfo = [];
 let urls = [];
 
 console.log("jasons scraper written 2017 -> time to get some info")
-
+console.log("Summon CODE MAGIC")
 request(url, function (error, response, html) {
 		if (!error) {
 				let $ = cheerio.load(html);
@@ -28,7 +28,6 @@ request(url, function (error, response, html) {
 										let $ = cheerio.load(html);
 										let agentname, agencyname, email, number;
 										let json = {
-												agentname: "",
 												agencyname: "",
 												email: "",
 												website: "",
@@ -37,9 +36,12 @@ request(url, function (error, response, html) {
 										// use the selector by ID to get the element for the agent name.
 										// extract the inner HTML of the element using html cheerio function
 										json.agentname = $('#OneSheetUser_lblName').html();
-											json.fullname = fullName =agentname.split(' '),
-											json.firstname = fullName[0],
-											json.lastname = fullName[fullName.length - 1];]
+
+										//json.fullname = json.agentname.split(''),
+
+										json.firstname = json.agentname.split(" ")[0];
+
+										json.lastname = json.agentname.split(" ")[1];
 
 										// ^ should perform some REGEX on this name, to parse out first, middle, last names and unnecessary attributes.
 										// use the selector by CLASS to get the element for the agent name.
@@ -54,9 +56,9 @@ request(url, function (error, response, html) {
 										json.number = $('.oneSheetContactInfo>*:nth-child(7)').html();
 										agencyinfo.push(json);
 										if (urls.length == agencyinfo.length) {
-												fs.writeFile('agencyinfo.json1', JSON.stringify(agencyinfo1), function (err) {
+											console.log("file written please check project directory for output")
+												fs.writeFile('agencyinfo.json', JSON.stringify(agencyinfo), function (err) {
 
-														console.log("file written please check project directory for output")
 												});
 										}
 
