@@ -35,20 +35,17 @@ request(url, function (error, response, html) {
 										// use the selector by ID to get the element for the agent name.
 										// extract the inner HTML of the element using html cheerio function
 
-										json.firstname = $('#OneSheetUser_lblName').html().split(" ")[0].toLowerCase()
-										json.lastname = $('#OneSheetUser_lblName').html().split(" ")[1].toLowerCase()
-										// ^ should perform some REGEX on this name, to parse out first, middle, last names and unnecessary attributes.
-										// use the selector by CLASS to get the element for the agent name.
-										json.agencyname = $('.AgencyName').html();
+										json.firstname = $('#OneSheetUser_lblName').html().split(" ")[0].toLowerCase();
+										json.lastname = $('#OneSheetUser_lblName').html().split(" ")[1].toLowerCase();
 
+										json.agencyname = $('.AgencyName').html();
 										json.number = $('.oneSheetContactInfo>*:nth-child(7)').html().replace("(","").replace(")","").replace("-","").replace("-","").trim();
 										json.email = $(".oneSheetContactInfo>span:nth-child(3)").html();
-										// use selector for "a" href
 										json.website = $(".oneSheetContactInfo>a").html();
-										// console log the JSON
+
 										agencyinfo.push(json);
 										if (urls.length == agencyinfo.length) {
-											console.log("file written please check project directory for output")
+											console.log("file written please check project directory for output (filename: agencyinfo.json)")
 												fs.writeFile('agencyinfo.json', JSON.stringify(agencyinfo), function (err) {
 
 												});
