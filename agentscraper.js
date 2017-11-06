@@ -38,7 +38,8 @@ request(url, function (error, response, html) {
 										json.agencyname = $('.AgencyName').html();
 										//This returns a 2nd possible phone number but only if it is 10 digits , unfortunatly right now it returns as an array or null value but it should return as a string or an empty string
 										json.number = $('.oneSheetContactInfo>*:nth-child(7)').html().replace(/\D+/g, '');
-										json.altnumber = $('.oneSheetContactInfo>*:nth-child(9)').html().replace(/\D+/g, '')
+										json.altnumber = $('.oneSheetContactInfo>*:nth-child(9)').html().replace(/\D+/g, '').match(/^\d{10}$/)
+										json.altnumber = json.altnumber ? json.altnumber[0] : ""
 										json.email = $(".oneSheetContactInfo>span:nth-child(3)").html();
 										json.website = $(".oneSheetContactInfo>a").html();
 
@@ -53,7 +54,7 @@ request(url, function (error, response, html) {
 
 								}
 								else
-								{
+		{
 										agencyinfo.push({error: "error occured"});
 								}
 						});
