@@ -36,20 +36,18 @@ request(url, function (error, response, html) {
 										// extract the inner HTML of the element using html cheerio function
 
 										json.firstname = $('#OneSheetUser_lblName').html().split(" ")[0].toLowerCase().replace (/\b\w/g, function(l){ return l.toUpperCase() });
-
 										json.lastname = $('#OneSheetUser_lblName').html().split(" ")[1].toLowerCase().replace (/\b\w/g, function(l){ return l.toUpperCase() });
-
-
-
 										json.agencyname = $('.AgencyName').html();
-										json.number = $('.oneSheetContactInfo>*:nth-child(7)').html().replace("(","").replace(")","").replace("-","").replace("-","").replace(/ /g,'');
+										json.number = $('.oneSheetContactInfo>*:nth-child(7)').html().replace("(","").replace(")","").replace("-","").replace("-","").replace(/\s/g, '');;
+										json.altnumber = $('.oneSheetContactInfo>*:nth-child(9)').html().replace("(","").replace(")","").replace("-","").replace("-","").replace(/\s/g, '');;
+
 										json.email = $(".oneSheetContactInfo>span:nth-child(3)").html();
 										json.website = $(".oneSheetContactInfo>a").html();
 
 										agencyinfo.push(json);
 										if (urls.length == agencyinfo.length) {
-											console.log("file written please check project directory for output")
-												fs.writeFile('agencyinfosplit.json', JSON.stringify(agencyinfo), function (err) {
+											console.log("file written please check project directory for output (filename: agencyinfo.json)")
+												fs.writeFile('agencyinfo.json', JSON.stringify(agencyinfo), function (err) {
 
 												});
 										}
