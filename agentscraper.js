@@ -35,7 +35,7 @@ request(url, function (error, response, html) {
 										//The regex basically matches the first letter of each word within the given string and transforms only that letter to uppercase:
 										json.firstname = $('#OneSheetUser_lblName').html().split(" ")[0].toLowerCase().replace (/\b\w/g, function(l){ return l.toUpperCase() });
 										json.lastname = $('#OneSheetUser_lblName').html().split(" ")[1].toLowerCase().replace (/\b\w/g, function(l){ return l.toUpperCase() });
-										json.agencyname = $('.AgencyName').html();
+										json.agencyname = $('.AgencyName').html().toLowerCase().replace (/\b\w/g, function(l){ return l.toUpperCase() });
 										//This returns a 2nd possible phone number but only if it is 10 digits , unfortunatly right now it returns as an array or null value but it should return as a string or an empty string
 										json.number = $('.oneSheetContactInfo>*:nth-child(7)').html().replace(/\D+/g, '');
 										json.altnumber = $('.oneSheetContactInfo>*:nth-child(9)').html().replace(/\D+/g, '').match(/^\d{10}$/)
